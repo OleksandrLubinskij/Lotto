@@ -1,0 +1,41 @@
+body {
+    background-color: black;
+    color: aliceblue;
+}
+.main_container {
+    position: absolute;
+    top: 40vh;
+    left: 39vw;
+    border: 3px solid aliceblue;
+    border-radius: 6%/8%;
+    width: 20vw;
+    height: 20vh;
+    padding: 1.5rem;
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title_container {
+    text-align: center;
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.gamemode_button {
+    width: 10vw;
+    border: 1px solid aliceblue;
+    border-radius: 3%/5%;
+    text-align: center;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.gamemode_button a {
+    color: aliceblue;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
