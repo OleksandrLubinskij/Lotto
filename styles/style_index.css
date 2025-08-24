@@ -19,7 +19,7 @@ body {
     box-shadow: 3px 3px 15px aliceblue;
 }
 
-#title_container {
+#title_container, #testing {
     text-align: center;
     font-weight: 600;
     font-size: 2rem;
