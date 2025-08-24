@@ -4,6 +4,6 @@ let colors = ["red", "green", "blue", "orange"];
 
 let newHTML = "";
 for(let i = 0; i < colors.length; i++) {
-    newHTML += `<span style="color:${colors[i]}">${text[i]}</span>`;
+    newHTML += `<span style="color:${colors[i]}; text-shadow: 1.5px 1.5px 10px ${colors[i]}">${text[i]}</span>`;
 }
 title.innerHTML = newHTML;

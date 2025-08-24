@@ -16,6 +16,7 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
+    box-shadow: 3px 3px 15px aliceblue;
 }
 
 #title_container {
@@ -25,7 +26,7 @@ body {
     margin-bottom: 2rem;
 }
 
-.gamemode_button {
+.gamemode_button, .gamemode_button:hover, .gamemode_button:focus {
     width: 10vw;
     height: 2vh;
     border: 1px solid aliceblue;
@@ -33,10 +34,18 @@ body {
     text-align: center;
     padding: 0.5rem;
     margin-bottom: 1rem;
-}
-
-.gamemode_button a {
-    color: aliceblue;
     text-decoration: none;
     font-size: 1.2rem;
+    color: aliceblue;
+    border-bottom: 4px solid rgb(235, 229, 229);
+    border-right: 4px solid rgb(235, 229, 229);
+}
+
+.gamemode_button:hover {
+    background-color: rgb(20, 20, 20);
+}
+.gamemode_button:focus {
+    border: 1px solid aliceblue;
+    border-top: 4px solid rgb(235, 229, 229);
+    border-left: 4px solid rgb(235, 229, 229);
 }
