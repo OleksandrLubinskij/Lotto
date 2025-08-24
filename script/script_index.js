@@ -1,0 +1,9 @@
+let title = document.getElementById("title_container");
+let text = title.textContent.trim();
+let colors = ["red", "green", "blue", "orange"];
+
+let newHTML = "";
+for(let i = 0; i < colors.length; i++) {
+    newHTML += `<span style="color:${colors[i]}">${text[i]}</span>`;
+}
+title.innerHTML = newHTML;

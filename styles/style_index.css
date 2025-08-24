@@ -18,7 +18,7 @@ body {
     flex-direction: column;
 }
 
-.title_container {
+#title_container {
     text-align: center;
     font-weight: 600;
     font-size: 2rem;
@@ -27,6 +27,7 @@ body {
 
 .gamemode_button {
     width: 10vw;
+    height: 2vh;
     border: 1px solid aliceblue;
     border-radius: 3%/5%;
     text-align: center;
