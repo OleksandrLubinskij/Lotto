@@ -10,5 +10,6 @@ amounts.forEach(a => {
                 };
         sessionStorage.clear();
         sessionStorage.setItem("settings", JSON.stringify(settings));
+        window.location.href = "game.html";
     })
 })
