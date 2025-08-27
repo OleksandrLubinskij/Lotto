@@ -10,9 +10,9 @@ title.innerHTML = newHTML;
 
 
 const play_with_bot_btn = document.getElementsByClassName("gamemode_button")[0];
+const settings = '{"gamemode": "Bot","players": 0,}';
 play_with_bot_btn.addEventListener('click', function() {
     sessionStorage.clear();
-    const settings = '{"gamemode": "Bot","players": 0,}';
     sessionStorage.setItem("settings", JSON.stringify(settings));
 })
 
