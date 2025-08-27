@@ -1,6 +1,6 @@
 const amounts = document.querySelectorAll(".amount");
 let players_amount = 0;
-const settings = '';
+let settings = '';
 amounts.forEach(a => {
     a.addEventListener('click', event => {
         event.preventDefault();
