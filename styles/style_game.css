@@ -1,0 +1,8 @@
+#main_container {
+    width: 50vw;
+    display:flex;
+    justify-content: space-around;
+}
+td {
+    font-size: 2rem;
+}
