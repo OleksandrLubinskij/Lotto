@@ -1,0 +1,24 @@
+body {
+    background-color: black;
+    color: aliceblue;
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+}
+
+.amount, .amount:hover, .amount:focus, .gamemode_button, .gamemode_button:hover, .gamemode_button:focus {    
+    border: 1px solid aliceblue;
+    text-decoration: none;
+    color: aliceblue;
+    border-bottom: 4px solid rgb(235, 229, 229);
+    border-right: 4px solid rgb(235, 229, 229);
+}
+
+.amount:hover, .gamemode_button:hover {
+    background-color: rgb(20, 20, 20);
+    cursor: pointer;
+}
+.amount:focus, .gamemode_button:focus {
+    border: 1px solid aliceblue;
+    border-top: 4px solid rgb(235, 229, 229);
+    border-left: 4px solid rgb(235, 229, 229);
+}   
