@@ -1,11 +1,39 @@
 #main_container {
-    width: 50vw;
+    width: 100vw;
+    height: 90vh;
     display:grid;
-    justify-content: space-around;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
 }
 td {
     font-size: 2rem;
+    width: 50px;   /* ширина клітинки */
+    height: 50px;  /* висота клітинки */
+    text-align: center; /* вирівнювання тексту по центру */
+    vertical-align: middle;
 }
 table {
     margin-left: 10px;
+}
+
+#barrel {
+    border: 2px solid aliceblue;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    width: 50%;
+    height: 50%;
+    align-self: center;
+    justify-self: center;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card:first-child {
+    grid-column-start: 1;
+    grid-column-end: 2;
 }
