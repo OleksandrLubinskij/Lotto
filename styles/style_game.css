@@ -1,6 +1,6 @@
 #main_container {
     width: 50vw;
-    display:flex;
+    display:grid;
     justify-content: space-around;
 }
 td {
