@@ -6,7 +6,7 @@ body {
 }
 
 #main_container {
-    border: 1px solid aliceblue;
+    border: 1px solid #f0f8ff;
     border-radius: 2%/4%;
     width:50vw;
     height: 40vh;
