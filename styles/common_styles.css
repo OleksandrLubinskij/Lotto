@@ -3,9 +3,11 @@ body {
     color: aliceblue;
     font-family: "Comfortaa", sans-serif;
     font-optical-sizing: auto;
+    display: flex;
+    justify-content: center;
 }
 
-.amount, .amount:hover, .amount:focus, .gamemode_button, .gamemode_button:hover, .gamemode_button:focus {    
+.amount, .amount:hover, .amount:focus, .gamemode_button, .gamemode_button:hover, .gamemode_button:focus, #take_barrel, #take_barrel:hover, #take_barrel:active {    
     border: 1px solid aliceblue;
     text-decoration: none;
     color: aliceblue;
@@ -13,11 +15,11 @@ body {
     border-right: 4px solid rgb(235, 229, 229);
 }
 
-.amount:hover, .gamemode_button:hover {
+.amount:hover, .gamemode_button:hover, #take_barrel:hover {
     background-color: rgb(20, 20, 20);
     cursor: pointer;
 }
-.amount:focus, .gamemode_button:focus {
+.amount:focus, .gamemode_button:focus, #take_barrel:active {
     border: 1px solid aliceblue;
     border-top: 4px solid rgb(235, 229, 229);
     border-left: 4px solid rgb(235, 229, 229);

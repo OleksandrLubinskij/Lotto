@@ -1,7 +1,7 @@
-body {
+/* body {
     display: flex;
     justify-content: center;
-}
+} */
 #main_container {
     width: 95vw;
     height: 90vh;
@@ -11,14 +11,13 @@ body {
 }
 td {
     font-size: 2rem;
-    width: 2;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     text-align: center;
     border: 3px solid aliceblue;
     vertical-align: middle;
 }
 table {
-    width: 80%;
     margin-left: 10px;
     border: 3px solid aliceblue;
 }
@@ -34,10 +33,17 @@ table {
     justify-self: center;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 #barrel img {
     width: 50%;
     height: 50%;
+}
+#take_barrel {
+    margin-top: 2rem;
+    font-size: 1.8rem;
+    padding: 5px;
 }
 
 .card {
