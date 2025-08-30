@@ -7,7 +7,7 @@ body {
     justify-content: center;
 }
 
-.amount, .amount:hover, .amount:focus, .gamemode_button, .gamemode_button:hover, .gamemode_button:focus, #take_barrel, #take_barrel:hover, #take_barrel:active {    
+.amount, .amount:hover, .amount:active, .gamemode_button, .gamemode_button:hover, .gamemode_button:active, #take_barrel, #take_barrel:hover, #take_barrel:active {    
     border: 1px solid aliceblue;
     text-decoration: none;
     color: aliceblue;
@@ -19,7 +19,7 @@ body {
     background-color: rgb(20, 20, 20);
     cursor: pointer;
 }
-.amount:focus, .gamemode_button:focus, #take_barrel:active {
+.amount:active, .gamemode_button:active, #take_barrel:active {
     border: 1px solid aliceblue;
     border-top: 4px solid rgb(235, 229, 229);
     border-left: 4px solid rgb(235, 229, 229);
