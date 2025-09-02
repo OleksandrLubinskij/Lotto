@@ -20,12 +20,7 @@ class Game {
     static random(min_num, max_num) {
         return Math.floor(Math.random() * (max_num - min_num + 1)) + min_num;
     }
-    static shuffle_arr(arr) {
-        if (arr.length <= 1) return arr;
-        let new_position = this.random(1, 2);
-        [arr[1], arr[new_position]] = [arr[new_position], arr[1]];
-        return arr;
-    }
+
     static fill_arr(arr) {
         for(let i = 0; i < 3; i++) {
             arr.push(0);
@@ -33,26 +28,44 @@ class Game {
         return arr;
     }
 
+    static shuffle_arr(arr) {
+        if (arr.length <= 1) return arr;
+        let new_position = this.random(1, 2);
+        [arr[1], arr[new_position]] = [arr[new_position], arr[1]];
+        return arr;
+    }
+    
+    static arrange_col(arr) {
+        if(arr.length == 1 || arr[0] < arr[1]) return arr;
+        else {
+            let flag = arr[0];
+            arr[0] = arr[1];
+            arr[1] = flag;
+            return arr;
+        }
+    }
+
+    static fix_card_col(arr) {
+        let arranged_arr = Game.arrange_col(arr);
+        return Game.shuffle_arr(arranged_arr);
+    }
     generate_cards() {
-        let p_card = [];
         let max_amount_in_card = 15;
         
-        for(let i = 0; i < this.players_amount; i++) {
+        for(let i = 0; i < this.players_amount; i++) {//цикл який перебирає гравців
             let min_cell_num = 1;
             let max_cell_num = 9;
-            for(let j = 0; j < 9; j++) {
+            for(let j = 0; j < 9; j++) {//цикл який перебирає стовпці у карті
                 let num_in_col = Game.random(1, 2);
                 let card_col = [];
                 card_col = Game.fill_arr(card_col);
-                for(let k = 0; k < num_in_col; k++) {
+                for(let k = 0; k < num_in_col; k++) {//цикл який де додаються цифри
                     let cell_num = Game.random(min_cell_num, max_cell_num);
-                    console.log(`Cell_num - ${cell_num}`)
                     card_col[k] = cell_num;
                 }
-                card_col = Game.shuffle_arr(card_col);
-                p_card = this.players[i].player_card;
-                p_card.push(card_col);
-                console.log(`${min_cell_num} - ${max_cell_num}`);
+                card_col = Game.fix_card_col(card_col);
+                console.log(card_col);
+                this.players[i].player_card = this.players[i].player_card.concat(card_col);
                 min_cell_num += 10;
                 max_cell_num += 10;
             }
