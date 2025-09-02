@@ -49,20 +49,29 @@ class Game {
         let arranged_arr = Game.arrange_col(arr);
         return Game.shuffle_arr(arranged_arr);
     }
+
+    static generate_card_col(card_col, num_in_col, min_cell_num, max_cell_num) {
+        let banned_nums = [];
+        card_col = Game.fill_arr(card_col);
+                for(let k = 0; k < num_in_col; k++) {//цикл який де додаються цифри
+                    let cell_num = Game.random(min_cell_num, max_cell_num);
+                    if(!(cell_num in banned_nums))
+                        {card_col[k] = cell_num;
+                        banned_nums.push(cell_num);
+                    }
+                }
+        return card_col;
+    }
+
     generate_cards() {
         let max_amount_in_card = 15;
-        
         for(let i = 0; i < this.players_amount; i++) {//цикл який перебирає гравців
             let min_cell_num = 1;
             let max_cell_num = 9;
             for(let j = 0; j < 9; j++) {//цикл який перебирає стовпці у карті
                 let num_in_col = Game.random(1, 2);
                 let card_col = [];
-                card_col = Game.fill_arr(card_col);
-                for(let k = 0; k < num_in_col; k++) {//цикл який де додаються цифри
-                    let cell_num = Game.random(min_cell_num, max_cell_num);
-                    card_col[k] = cell_num;
-                }
+                card_col = Game.generate_card_col(card_col, num_in_col, min_cell_num, max_cell_num);
                 card_col = Game.fix_card_col(card_col);
                 console.log(card_col);
                 this.players[i].player_card = this.players[i].player_card.concat(card_col);
