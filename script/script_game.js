@@ -18,7 +18,7 @@ class Game {
     }
 
     static random(min_num, max_num) {
-        return Math.floor(Math.random() * max_num) + min_num;
+        return Math.floor(Math.random() * (max_num - min_num + 1)) + min_num;
     }
     static shuffle_arr(arr) {
         if (arr.length <= 1) return arr;
@@ -46,6 +46,7 @@ class Game {
                 card_col = Game.fill_arr(card_col);
                 for(let k = 0; k < num_in_col; k++) {
                     let cell_num = Game.random(min_cell_num, max_cell_num);
+                    console.log(`Cell_num - ${cell_num}`)
                     card_col[k] = cell_num;
                 }
                 card_col = Game.shuffle_arr(card_col);
