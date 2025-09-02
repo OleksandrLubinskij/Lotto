@@ -13,9 +13,11 @@ const play_with_bot_btn = document.getElementsByClassName("gamemode_button")[0];
 
 play_with_bot_btn.addEventListener('click', function() {
     sessionStorage.clear();
-    const settings = {gamemode: "Bot",
-                players: 2
-            };
+    const settings = {
+                    gamemode: "Bot",
+                    players: 2
+                };
     sessionStorage.setItem("settings", JSON.stringify(settings));
 })
+
 
