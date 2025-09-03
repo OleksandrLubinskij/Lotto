@@ -50,12 +50,12 @@ class Game {
         return Game.shuffle_arr(arranged_arr);
     }
 
-    static generate_card_col(card_col, num_in_col, min_cell_num, max_cell_num) {
+    static generate_card_col(card_col, min_cell_num, max_cell_num, num_in_col) {
         let banned_nums = [];
         card_col = Game.fill_arr(card_col);
                 for(let k = 0; k < num_in_col; k++) {//цикл який де додаються цифри
                     let cell_num = Game.random(min_cell_num, max_cell_num);
-                    if(!(cell_num in banned_nums))
+                    if(!banned_nums.includes(cell_num))
                         {card_col[k] = cell_num;
                         banned_nums.push(cell_num);
                     }
@@ -63,25 +63,66 @@ class Game {
         return card_col;
     }
 
-    generate_cards() {
-        let max_amount_in_card = 15;
-        for(let i = 0; i < this.players_amount; i++) {//цикл який перебирає гравців
-            let min_cell_num = 1;
-            let max_cell_num = 9;
-            for(let j = 0; j < 9; j++) {//цикл який перебирає стовпці у карті
-                let num_in_col = Game.random(1, 2);
-                let card_col = [];
-                card_col = Game.generate_card_col(card_col, num_in_col, min_cell_num, max_cell_num);
-                card_col = Game.fix_card_col(card_col);
-                console.log(card_col);
-                this.players[i].player_card = this.players[i].player_card.concat(card_col);
-                min_cell_num += 10;
-                max_cell_num += 10;
+    static amount_of_num_in_col(max_amount_in_card) {
+        let amounts = [];
+        for (let i = 0; i < 9; i++) {
+            let nums_in_col = Game.random(1, 2);
+            amounts.push(nums_in_col);
+        }
+
+        let sum_amount = amounts.reduce((a, b) => a + b, 0);
+
+        if (sum_amount > max_amount_in_card) {
+            let differ = sum_amount - max_amount_in_card;
+
+            for (let i = 0; differ >= 0 && i < amounts.length; i++) {
+                if (amounts[i] === 2) {
+                    console.log(`amount before ${amounts[i]}`);
+                    amounts[i]--;
+                    console.log(`amount after ${amounts[i]}`);
+
+                    differ--;
+                }
+            }
+        } 
+        else if (sum_amount < max_amount_in_card) {
+            let differ = max_amount_in_card - sum_amount;
+
+            for (let i = 0; differ >= 0 && i < amounts.length; i++) {
+                if (amounts[i] === 1) {
+                    console.log(`amount before ${amounts[i]}`);
+                    amounts[i]++;
+                    console.log(`amount after ${amounts[i]}`);
+                    differ--;
+                }
             }
         }
+        return amounts;
+    }
+
+
+    generate_cards() {
+    let max_amount_in_card = 15;
+    for(let i = 0; i < this.players_amount; i++) { // цикл по гравцях
+        let min_cell_num = 1;
+        let max_cell_num = 9;
+
+        // 🔹 Генеруємо розподіл один раз для всієї карти
+        let amounts = Game.amount_of_num_in_col(max_amount_in_card);
+
+        for(let j = 0; j < 9; j++) { // цикл по стовпцях
+            let card_col = [];
+            card_col = Game.generate_card_col(card_col, min_cell_num, max_cell_num, amounts[j]);
+            card_col = Game.fix_card_col(card_col);
+            console.log(card_col);
+            this.players[i].player_card.push(card_col);
+            min_cell_num += 10;
+            max_cell_num += 10;
+        }
+        console.log(this.players[i].player_card);
     }
 }
-
+}
 class Player {
     constructor(name) {
         this.player_name = name;
