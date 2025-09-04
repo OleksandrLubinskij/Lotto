@@ -16,7 +16,7 @@ table {
     margin-left: 10px;
 }
 table, td {
-    border: 3px dashed aliceblue;
+    border: 3px dashed aliceblue; 
 }
 
 #barrel {

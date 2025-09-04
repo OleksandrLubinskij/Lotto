@@ -1,12 +1,14 @@
-const card = document.getElementById("card_template");
-const main_container = document.getElementById("main_container");
 const settings = JSON.parse(sessionStorage.getItem("settings"));
 const players_amount = settings.players;
-for(let i = 0; i < players_amount; i++) {
-    let clone = card.content.cloneNode(true);
-    main_container.appendChild(clone);
-}
 
+function generate_card_template(players_amount) {
+    const card = document.getElementById("card_template");
+    const main_container = document.getElementById("main_container");
+    for(let i = 0; i < players_amount; i++) {
+        let clone = card.content.cloneNode(true);
+        main_container.appendChild(clone);
+    }
+}
 class Game {
     constructor(players_amount) {
         this.players_amount = players_amount;
@@ -39,7 +41,7 @@ class Game {
             arr[0] = arr[1];
             arr[1] = flag;
             return arr;
-        }
+        } 
     }
 
     static fix_card_col(arr) {
@@ -108,11 +110,10 @@ class Game {
             let card_col = [];
             card_col = Game.generate_card_col(card_col, min_cell_num, max_cell_num, amounts[j]);
             card_col = Game.fix_card_col(card_col);
-            this.players[i].player_card = this.players[i].player_card.concat(card_col);
+            this.players[i].player_card.push(card_col);
             min_cell_num += 10;
             max_cell_num += 10;
         }
-        console.log(this.players[i].player_card);
     }
 }
 }
@@ -127,3 +128,6 @@ let game = new Game(players_amount);
 
 game.generate_cards();
 console.log(game.players);
+
+generate_card_template(players_amount);
+
