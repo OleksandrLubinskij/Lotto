@@ -156,13 +156,19 @@ class Player {
 
     take_turn() {
         let barrel_num = Game.random(1, 90);
-        console.log(this.player_name)
+        const barrel_block = document.querySelector('#num_from_barrel');
+        const barrel_msg = document.querySelector('#message');
+        barrel_block.textContent = barrel_num;
+        let found = false;
         this.player_card.forEach(element => {
-            if(element.includes(barrel_num)) {
-                console.log(barrel_num);
-                console.log("In card");
-            }
+            if(element.includes(barrel_num)) found = true;
         })
+        if(found) {
+                barrel_msg.textContent = "Це ваше число!";
+            }
+        else {
+                barrel_msg.textContent = "На жаль, не пощастило";
+            }
     }
 
 }
