@@ -125,13 +125,19 @@ class Player {
         this.players = gameInstance.get_players();
     }
 
-    static get_card(containerId) {
+    static get_card(index = null) {
+    if (index === null) {
+        // Беремо шаблон
         const template = document.getElementById("card_template");
-
         return template.content.cloneNode(true);
+    } else {
+        // Беремо готову карту з DOM
+        return document.querySelector(`.card[data-player_index='${index}']`);
     }
+}
+
     render_card(containerId, player_index) {
-        const clone = Player.get_card(containerId);
+        const clone = Player.get_card();
         const container = document.getElementById(containerId);
         const name_tag = clone.querySelector("#name");
         name_tag.textContent = this.player_name;
@@ -148,10 +154,12 @@ class Player {
         container.appendChild(clone);
     }
 
-    take_turn(turn) {
+    take_turn() {
         let barrel_num = Game.random(1, 90);
+        console.log(this.player_name)
         this.player_card.forEach(element => {
             if(element.includes(barrel_num)) {
+                console.log(barrel_num);
                 console.log("In card");
             }
         })
@@ -162,5 +170,38 @@ class Player {
 let game = new Game(players_amount);
 game.generate_cards();
 game.fill_card_by_nums();
-let players = game.get_players();
-players[2].take_turn();
+
+
+function Play(game) {
+    let turn = 0;
+    let players = game.get_players();
+        const take_barrel_btn = document.querySelector("#barrel");
+        take_barrel_btn.addEventListener('click', function() {
+            players[turn].take_turn();
+            const prev_index = (turn > 0) ? turn - 1 : players_amount - 1;
+            const prev_clone = Player.get_card(prev_index);
+            const curr_clone = Player.get_card(turn);
+
+            let cur_table = curr_clone.querySelector('table');
+            let cur_td = curr_clone.querySelectorAll('td');
+            let cur_name_tag = curr_clone.querySelector('#name');
+            let prev_table = prev_clone.querySelector('table');
+            let prev_td = prev_clone.querySelectorAll('td');
+            let prev_name_tag = prev_clone.querySelector('#name');
+
+            cur_table.style.borderColor = 'rgb(209, 209, 90)';
+            cur_td.forEach(element => {
+                element.style.borderColor = 'rgb(209, 209, 90)';
+            })
+            cur_name_tag.style.color = 'rgb(209, 209, 90)';
+            prev_table.style.borderColor = 'rgb(240, 248, 255)';
+            prev_td.forEach(element => {
+                element.style.borderColor = 'rgb(240, 248, 255)';
+            })
+            prev_name_tag.style.color = 'rgb(240, 248, 255)';
+
+            turn++;
+            if(turn == players_amount) turn = 0;
+        } )
+    }
+Play(game);
