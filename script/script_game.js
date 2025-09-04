@@ -6,7 +6,7 @@ class Game {
         this.players_amount = players_amount;
         this.players = [];
         for(let i = 0; i < players_amount; i++) {
-            let player = new Player(`Гравець ${i+1}`);
+            let player = new Player(`Гравець ${i+1}`, this);
             this.players.push(player)
         }
     }
@@ -114,22 +114,28 @@ class Game {
         })
     }
 
-
+    get_players() {
+        return this.players;
+    }
 }
 class Player {
-    constructor(name) {
+    constructor(name, gameInstance) {
         this.player_name = name;
         this.player_card = [];
+        this.players = gameInstance.get_players();
     }
 
-    render_card(containerId, player_index) {
+    static get_card(containerId) {
         const template = document.getElementById("card_template");
-        const container = document.getElementById(containerId);
 
-        // Клонуємо шаблон
-        const clone = template.content.cloneNode(true);
+        return template.content.cloneNode(true);
+    }
+    render_card(containerId, player_index) {
+        const clone = Player.get_card(containerId);
+        const container = document.getElementById(containerId);
+        const name_tag = clone.querySelector("#name");
+        name_tag.textContent = this.player_name;
         clone.querySelector('.card').dataset.player_index = player_index;
-        // Заповнюємо клітинки
         for (let row = 0; row < 3; row++) {
             for (let col = 0; col < 9; col++) {
                 let value = this.player_card[col][row];
@@ -141,8 +147,20 @@ class Player {
 
         container.appendChild(clone);
     }
+
+    take_turn(turn) {
+        let barrel_num = Game.random(1, 90);
+        this.player_card.forEach(element => {
+            if(element.includes(barrel_num)) {
+                console.log("In card");
+            }
+        })
+    }
+
 }
 
 let game = new Game(players_amount);
 game.generate_cards();
 game.fill_card_by_nums();
+let players = game.get_players();
+players[2].take_turn();
