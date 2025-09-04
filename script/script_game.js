@@ -1,14 +1,6 @@
 const settings = JSON.parse(sessionStorage.getItem("settings"));
 const players_amount = settings.players;
 
-function generate_card_template(players_amount) {
-    const card = document.getElementById("card_template");
-    const main_container = document.getElementById("main_container");
-    for(let i = 0; i < players_amount; i++) {
-        let clone = card.content.cloneNode(true);
-        main_container.appendChild(clone);
-    }
-}
 class Game {
     constructor(players_amount) {
         this.players_amount = players_amount;
@@ -59,7 +51,7 @@ class Game {
             if (!banned_nums.includes(cell_num)) {
                 card_col[k] = cell_num;
                 banned_nums.push(cell_num);
-                k++; // рухаємося далі тільки якщо знайшли унікальне число
+                k++;
             }
         }
 
@@ -99,14 +91,13 @@ class Game {
 
     generate_cards() {
     let max_amount_in_card = 15;
-    for(let i = 0; i < this.players_amount; i++) { // цикл по гравцях
+    for(let i = 0; i < this.players_amount; i++) { 
         let min_cell_num = 1;
         let max_cell_num = 9;
 
-        // 🔹 Генеруємо розподіл один раз для всієї карти
         let amounts = Game.amount_of_num_in_col(max_amount_in_card);
 
-        for(let j = 0; j < 9; j++) { // цикл по стовпцях
+        for(let j = 0; j < 9; j++) {
             let card_col = [];
             card_col = Game.generate_card_col(card_col, min_cell_num, max_cell_num, amounts[j]);
             card_col = Game.fix_card_col(card_col);
@@ -115,19 +106,43 @@ class Game {
             max_cell_num += 10;
         }
     }
-}
+    }
+
+    fill_card_by_nums() {
+        this.players.forEach((player, index) => {
+            player.render_card("main_container", index);
+        })
+    }
+
+
 }
 class Player {
     constructor(name) {
         this.player_name = name;
         this.player_card = [];
     }
+
+    render_card(containerId, player_index) {
+        const template = document.getElementById("card_template");
+        const container = document.getElementById(containerId);
+
+        // Клонуємо шаблон
+        const clone = template.content.cloneNode(true);
+        clone.querySelector('.card').dataset.player_index = player_index;
+        // Заповнюємо клітинки
+        for (let row = 0; row < 3; row++) {
+            for (let col = 0; col < 9; col++) {
+                let value = this.player_card[col][row];
+                if (value !== 0) {
+                    clone.querySelector(`.r${row}c${col}`).textContent = value;
+                }
+            }
+        }
+
+        container.appendChild(clone);
+    }
 }
 
 let game = new Game(players_amount);
-
 game.generate_cards();
-console.log(game.players);
-
-generate_card_template(players_amount);
-
+game.fill_card_by_nums();
