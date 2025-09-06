@@ -53,25 +53,25 @@ table, td {
 }
 
 
-.card:nth-of-type(3) {
+.card:nth-of-type(4) {
     margin-top: 25px;
     grid-column: 1 / 2;
 }
 
-.card:nth-of-type(4) {
+.card:nth-of-type(5) {
     margin-top: 25px;
     grid-column: 3 / 4;
 }
-.card:nth-of-type(5) {
-    grid-row: 2 / 3;
-    margin-top: 200px;
-}
 .card:nth-of-type(6) {
-    grid-column: 3 / 4;
     grid-row: 2 / 3;
     margin-top: 200px;
 }
 .card:nth-of-type(7) {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    margin-top: 200px;
+}
+.card:nth-of-type(8) {
     grid-column: 2 / 3;
     grid-row: 3 / 4;
 }
@@ -91,5 +91,52 @@ table, td {
     font-size: 6rem;
 }
 
+#winners {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid aliceblue;
+    border-radius: 3%;
+    padding: 20px;
+    background-color: black;
+    display: none;
+    align-items: center;
+    flex-direction: column;
 
+}
+
+#winners img {
+    width: 60%;
+    height: 40%;
+    margin-bottom: 2rem;
+}
+
+#winner_msg {
+    font-size: 2rem;
+}
+#buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+}
+#buttons a, #buttons div {
+    padding: 15px;
+    font-size: 1rem;
+    margin-top: 2rem;
+}
+
+#return_to_results {
+    width: 50%;
+    height: 20%;
+    grid-row: 3 / 4;
+    grid-column: 1 / 2;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    display: none;
+    align-items: center;
+    justify-content: center;
+} 
 

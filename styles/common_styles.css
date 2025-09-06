@@ -7,7 +7,7 @@ body {
     justify-content: center;
 }
 
-.amount, .amount:hover, .amount:active, .gamemode_button, .gamemode_button:hover, .gamemode_button:active, #take_barrel, #take_barrel:hover, #take_barrel:active {    
+.amount, .amount:hover, .amount:active, .gamemode_button, .gamemode_button:hover, .gamemode_button:active, #take_barrel, #take_barrel:hover, #take_barrel:active, #buttons a,#buttons a:hover,#buttons a:active, #buttons div, #buttons div:hover, #buttons div:active, #return_to_results, #return_to_results:hover, #return_to_results:active {    
     border: 1px solid aliceblue;
     text-decoration: none;
     color: aliceblue;
@@ -15,11 +15,11 @@ body {
     border-right: 4px solid rgb(235, 229, 229);
 }
 
-.amount:hover, .gamemode_button:hover, #take_barrel:hover {
+.amount:hover, .gamemode_button:hover, #take_barrel:hover, #buttons a:hover, #buttons div:hover, #return_to_results:hover {
     background-color: rgb(20, 20, 20);
     cursor: pointer;
 }
-.amount:active, .gamemode_button:active, #take_barrel:active {
+.amount:active, .gamemode_button:active, #take_barrel:active, #buttons a:active, #buttons div:active, #return_to_results:active {
     border: 1px solid aliceblue;
     border-top: 4px solid rgb(235, 229, 229);
     border-left: 4px solid rgb(235, 229, 229);

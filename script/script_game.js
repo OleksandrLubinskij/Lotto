@@ -128,6 +128,7 @@ class Player {
         this.player_card = [];
         this.players = gameInstance.get_players();
         this.used_barrels = gameInstance.get_used_barrels();
+        this.filled_cells = 0;
     }
 
     static get_card(index = null) {
@@ -171,7 +172,8 @@ take_turn() {
 
     this.players.forEach((player, index) => {
         if (player.player_card.some(col => col.includes(barrel_num))) {
-            lucky_players.push(index + 1);
+            lucky_players.push(player.player_name);
+            player.filled_cells++;
             const player_c = Player.get_card(index);
             const cell = player_c.querySelectorAll('td');
             cell.forEach(element => {
@@ -185,11 +187,21 @@ take_turn() {
     console.log(this.used_barrels);
     if (lucky_players.length > 0) {
         barrel_msg.textContent = `Гравцям пощастило: ${lucky_players.join(', ')}`;
+        let winners = [];
+        this.players.forEach(player => {
+            if(player.filled_cells == 15) {
+                winners.push(player.player_name)
+            }
+        })
         
     } else {
         barrel_msg.textContent = "На жаль, не пощастило";
     }
 }
+
+    // static check_win(winners) {
+    //     if(winners.length == 0)
+    // }
 
 
 
