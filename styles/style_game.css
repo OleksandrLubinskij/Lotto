@@ -42,7 +42,8 @@ table, td {
 #take_barrel {
     margin-top: 2rem;
     font-size: 1.8rem;
-    padding: 5px;
+    padding: 10px;
+    border-radius: 7% / 24%;
 }
 
 .card {
@@ -126,6 +127,7 @@ table, td {
     padding: 15px;
     font-size: 1rem;
     margin-top: 2rem;
+    border-radius: 4% / 19%;
 }
 
 #return_to_results {
