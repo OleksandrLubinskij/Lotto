@@ -128,7 +128,7 @@ class Player {
         this.player_card = [];
         this.players = gameInstance.get_players();
         this.used_barrels = gameInstance.get_used_barrels();
-        this.filled_cells = 0;
+        this.filled_cells = 13;
     }
 
     static get_card(index = null) {
@@ -169,7 +169,7 @@ take_turn() {
     barrel_block.textContent = barrel_num;
 
     let lucky_players = [];
-
+    let winners = [];
     this.players.forEach((player, index) => {
         if (player.player_card.some(col => col.includes(barrel_num))) {
             lucky_players.push(player.player_name);
@@ -187,7 +187,7 @@ take_turn() {
     console.log(this.used_barrels);
     if (lucky_players.length > 0) {
         barrel_msg.textContent = `Гравцям пощастило: ${lucky_players.join(', ')}`;
-        let winners = [];
+        
         this.players.forEach(player => {
             if(player.filled_cells == 15) {
                 winners.push(player.player_name)
@@ -197,11 +197,31 @@ take_turn() {
     } else {
         barrel_msg.textContent = "На жаль, не пощастило";
     }
+    Player.check_win(winners);
 }
 
-    // static check_win(winners) {
-    //     if(winners.length == 0)
-    // }
+    static check_win(winners) {
+        if(winners.length > 0) {
+            const winners_block = document.querySelector("#winners");
+            const winners_msg = document.querySelector("#winner_msg");
+            const look_gamefield = document.querySelector("#buttons div");
+            const return_to_results = document.querySelector("#return_to_results");
+            const overlay = document.querySelector("#overlay");
+            winners_block.style.display = "flex";
+            winners_msg.textContent = `${winners.length == 1 ? "Переможець: " : "Переможці: "} ${winners.join(", ")}`;
+            look_gamefield.addEventListener("click", function() {
+                winners_block.style.display = "none";
+                overlay.style.display = "none";
+                return_to_results.style.display = "flex";
+            })
+            return_to_results.addEventListener("click", function() {
+                winners_block.style.display = "flex";
+                overlay.style.display = "block";
+                return_to_results.style.display = "none";
+            })
+
+        }
+    }
 
 
 
