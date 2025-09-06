@@ -1,14 +1,24 @@
 const settings = JSON.parse(sessionStorage.getItem("settings"));
 const players_amount = settings.players;
+const gamemode = settings.gamemode;
+console.log(gamemode);
 
 class Game {
     constructor(players_amount) {
         this.players_amount = players_amount;
         this.players = [];
         this.used_barrels = [];
-        for(let i = 0; i < players_amount; i++) {
-            let player = new Player(`Гравець ${i+1}`, this);
-            this.players.push(player)
+        if(gamemode == "Friends") {
+            for(let i = 0; i < players_amount; i++) {
+                let player = new Player(`Гравець ${i+1}`, this);
+                this.players.push(player)
+            }
+        }
+        else {
+            let player = new Player("You", this);
+            let bot = new Player("Bot", this);
+            this.players.push(player);
+            this.players.push(bot);
         }
     }
 
@@ -128,7 +138,7 @@ class Player {
         this.player_card = [];
         this.players = gameInstance.get_players();
         this.used_barrels = gameInstance.get_used_barrels();
-        this.filled_cells = 13;
+        this.filled_cells = 0;
     }
 
     static get_card(index = null) {
@@ -184,7 +194,6 @@ take_turn() {
         }
     });
     this.used_barrels.push(barrel_num);
-    console.log(this.used_barrels);
     if (lucky_players.length > 0) {
         barrel_msg.textContent = `Гравцям пощастило: ${lucky_players.join(', ')}`;
         
@@ -235,34 +244,44 @@ game.fill_card_by_nums();
 
 function Play(game) {
     let turn = 0;
-    let players = game.get_players();
-        const take_barrel_btn = document.querySelector("#barrel");
-        take_barrel_btn.addEventListener('click', function() {
-            players[turn].take_turn();
-            const prev_index = (turn > 0) ? turn - 1 : players_amount - 1;
-            const prev_clone = Player.get_card(prev_index);
-            const curr_clone = Player.get_card(turn);
+    const players = game.get_players();
+    const take_barrel_btn = document.querySelector("#barrel");
 
-            let cur_table = curr_clone.querySelector('table');
-            let cur_td = curr_clone.querySelectorAll('td');
-            let cur_name_tag = curr_clone.querySelector('#name');
-            let prev_table = prev_clone.querySelector('table');
-            let prev_td = prev_clone.querySelectorAll('td');
-            let prev_name_tag = prev_clone.querySelector('#name');
+    function nextTurn() {
+        const currentPlayer = players[turn];
+        currentPlayer.take_turn();
+        const prev_index = (turn > 0) ? turn - 1 : players.length - 1;
+        const prev_clone = Player.get_card(prev_index);
+        const curr_clone = Player.get_card(turn);
 
-            cur_table.style.borderColor = 'rgb(240, 248, 255)';
-            cur_td.forEach(element => {
-                element.style.borderColor = 'rgb(240, 248, 255)';
-            })
-            cur_name_tag.style.color = 'rgb(240, 248, 255)';
-            prev_table.style.borderColor = 'rgb(128, 128, 128)';
-            prev_td.forEach(element => {
-                element.style.borderColor = 'rgb(128, 128, 128)';
-            })
-            prev_name_tag.style.color = 'rgb(128, 128, 128)';
+        let cur_table = curr_clone.querySelector('table');
+        let cur_td = curr_clone.querySelectorAll('td');
+        let cur_name_tag = curr_clone.querySelector('#name');
+        let prev_table = prev_clone.querySelector('table');
+        let prev_td = prev_clone.querySelectorAll('td');
+        let prev_name_tag = prev_clone.querySelector('#name');
 
-            turn++;
-            if(turn == players_amount) turn = 0;
-        } )
+        cur_table.style.borderColor = 'rgb(240, 248, 255)';
+        cur_td.forEach(el => el.style.borderColor = 'rgb(240, 248, 255)');
+        cur_name_tag.style.color = 'rgb(240, 248, 255)';
+
+        prev_table.style.borderColor = 'rgb(128, 128, 128)';
+        prev_td.forEach(el => el.style.borderColor = 'rgb(128, 128, 128)');
+        prev_name_tag.style.color = 'rgb(128, 128, 128)';
+
+        turn++;
+        if(turn >= players.length) turn = 0;
+
+        if(gamemode !== "Friends" && players[turn].player_name === "Bot") {
+            setTimeout(nextTurn, 1000);
+        }
     }
+
+    take_barrel_btn.addEventListener('click', function() {
+        if(players[turn].player_name !== "Bot") {
+            nextTurn();
+        }
+    });
+}
+
 Play(game);
