@@ -208,6 +208,7 @@ take_turn() {
             const return_to_results = document.querySelector("#return_to_results");
             const overlay = document.querySelector("#overlay");
             winners_block.style.display = "flex";
+            overlay.style.display = "block";
             winners_msg.textContent = `${winners.length == 1 ? "Переможець: " : "Переможці: "} ${winners.join(", ")}`;
             look_gamefield.addEventListener("click", function() {
                 winners_block.style.display = "none";
