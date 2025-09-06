@@ -30,14 +30,44 @@
     font-size: 1.2rem;
 }
 
-#info {
-    width: 90vw;
-    height: 90vh;
-    display: flex;
-    justify-content: end;
-    align-items: end;
+#info_btn, #info_btn:hover {
+    width: auto;
+    height: auto;
+    position: absolute;
+    bottom: 5%;
+    left: 95%;
+}
+
+#info_btn:hover {
+    cursor: pointer;
 }
 img {
     width: 2vw;
     height: 4vh;
+}
+
+#info {
+    height: 70vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    border: 3px solid aliceblue;
+    border-radius: 3% / 5%;
+    z-index: 10;
+    padding: 1.5rem;
+    display: none;
+}
+
+#close_info {
+    position: absolute;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    margin-top: 1.5rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+li {
+    margin-bottom: 4px;
 }

@@ -21,3 +21,18 @@ play_with_bot_btn.addEventListener('click', function() {
 })
 
 
+const info_block = document.querySelector("#info");
+const info_btn = document.querySelector("#info_btn");
+const close_info = document.querySelector("#close_info");
+const overlay = document.querySelector("#overlay");
+
+info_btn.addEventListener('click', function() {
+    info_block.style.display = "block";
+    overlay.style.display = "block";
+})
+
+close_info.addEventListener('click', function() {
+    info_block.style.display = "none";
+    overlay.style.display = "none";
+})
+
