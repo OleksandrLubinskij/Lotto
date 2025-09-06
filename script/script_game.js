@@ -5,6 +5,7 @@ class Game {
     constructor(players_amount) {
         this.players_amount = players_amount;
         this.players = [];
+        this.used_barrels = [];
         for(let i = 0; i < players_amount; i++) {
             let player = new Player(`Гравець ${i+1}`, this);
             this.players.push(player)
@@ -117,12 +118,16 @@ class Game {
     get_players() {
         return this.players;
     }
+    get_used_barrels() {
+        return this.used_barrels;
+    }
 }
 class Player {
     constructor(name, gameInstance) {
         this.player_name = name;
         this.player_card = [];
         this.players = gameInstance.get_players();
+        this.used_barrels = gameInstance.get_used_barrels();
     }
 
     static get_card(index = null) {
@@ -153,7 +158,11 @@ class Player {
     }
 
 take_turn() {
-    let barrel_num = Game.random(1, 90);
+    let barrel_num = 0;
+    do {
+        barrel_num = Game.random(1, 90);
+    }
+    while(this.used_barrels.includes(barrel_num));
     const barrel_block = document.querySelector('#num_from_barrel');
     const barrel_msg = document.querySelector('#message');
     barrel_block.textContent = barrel_num;
@@ -172,7 +181,8 @@ take_turn() {
             })
         }
     });
-
+    this.used_barrels.push(barrel_num);
+    console.log(this.used_barrels);
     if (lucky_players.length > 0) {
         barrel_msg.textContent = `Гравцям пощастило: ${lucky_players.join(', ')}`;
         
