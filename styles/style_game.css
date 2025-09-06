@@ -17,7 +17,7 @@ table {
 }
 
 table, td {
-    border: 3px dashed aliceblue;
+    border: 3px dashed rgb(128, 128, 128);
     border-radius: 1%/3%;
 }
 

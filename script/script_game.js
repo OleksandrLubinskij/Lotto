@@ -127,7 +127,6 @@ class Player {
 
     static get_card(index = null) {
     if (index === null) {
-        // Беремо шаблон
         const template = document.getElementById("card_template");
         return template.content.cloneNode(true);
     } else {
@@ -164,6 +163,13 @@ take_turn() {
     this.players.forEach((player, index) => {
         if (player.player_card.some(col => col.includes(barrel_num))) {
             lucky_players.push(index + 1);
+            const player_c = Player.get_card(index);
+            const cell = player_c.querySelectorAll('td');
+            cell.forEach(element => {
+                if(element.textContent.trim() == barrel_num) {
+                    element.style.backgroundColor = "#228B22";
+                }
+            })
         }
     });
 
@@ -201,16 +207,16 @@ function Play(game) {
             let prev_td = prev_clone.querySelectorAll('td');
             let prev_name_tag = prev_clone.querySelector('#name');
 
-            cur_table.style.borderColor = 'rgb(209, 209, 90)';
+            cur_table.style.borderColor = 'rgb(240, 248, 255)';
             cur_td.forEach(element => {
-                element.style.borderColor = 'rgb(209, 209, 90)';
-            })
-            cur_name_tag.style.color = 'rgb(209, 209, 90)';
-            prev_table.style.borderColor = 'rgb(240, 248, 255)';
-            prev_td.forEach(element => {
                 element.style.borderColor = 'rgb(240, 248, 255)';
             })
-            prev_name_tag.style.color = 'rgb(240, 248, 255)';
+            cur_name_tag.style.color = 'rgb(240, 248, 255)';
+            prev_table.style.borderColor = 'rgb(128, 128, 128)';
+            prev_td.forEach(element => {
+                element.style.borderColor = 'rgb(128, 128, 128)';
+            })
+            prev_name_tag.style.color = 'rgb(128, 128, 128)';
 
             turn++;
             if(turn == players_amount) turn = 0;
