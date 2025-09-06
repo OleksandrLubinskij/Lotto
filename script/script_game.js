@@ -131,7 +131,6 @@ class Player {
         const template = document.getElementById("card_template");
         return template.content.cloneNode(true);
     } else {
-        // Беремо готову карту з DOM
         return document.querySelector(`.card[data-player_index='${index}']`);
     }
 }
@@ -154,22 +153,29 @@ class Player {
         container.appendChild(clone);
     }
 
-    take_turn() {
-        let barrel_num = Game.random(1, 90);
-        const barrel_block = document.querySelector('#num_from_barrel');
-        const barrel_msg = document.querySelector('#message');
-        barrel_block.textContent = barrel_num;
-        let found = false;
-        this.player_card.forEach(element => {
-            if(element.includes(barrel_num)) found = true;
-        })
-        if(found) {
-                barrel_msg.textContent = "Це ваше число!";
-            }
-        else {
-                barrel_msg.textContent = "На жаль, не пощастило";
-            }
+take_turn() {
+    let barrel_num = Game.random(1, 90);
+    const barrel_block = document.querySelector('#num_from_barrel');
+    const barrel_msg = document.querySelector('#message');
+    barrel_block.textContent = barrel_num;
+
+    let lucky_players = [];
+
+    this.players.forEach((player, index) => {
+        if (player.player_card.some(col => col.includes(barrel_num))) {
+            lucky_players.push(index + 1);
+        }
+    });
+
+    if (lucky_players.length > 0) {
+        barrel_msg.textContent = `Гравцям пощастило: ${lucky_players.join(', ')}`;
+        
+    } else {
+        barrel_msg.textContent = "На жаль, не пощастило";
     }
+}
+
+
 
 }
 
